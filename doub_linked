@@ -1,0 +1,78 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node {
+    int data;
+    struct node*prev;
+    struct node*next;
+}*newnode, *temp, *head=0, *tail=0;
+void create()
+{
+    int v,n;
+    do {
+        printf("enter a value:") ;
+        scanf ("%d", &v) ;
+        newnode=(struct node*)malloc(sizeof (struct node)) ;
+        newnode->data=v;
+        newnode->prev=0;
+        newnode->next=0;
+        if(head==0)
+        {
+            head=newnode;
+            tail=newnode;
+        }
+        else
+        {
+            tail->next=newnode;
+            newnode->prev=tail;
+            newnode->next=0;
+            tail=newnode;
+        }
+        printf("enter 1 to continue and 0 to exit:") ;
+        scanf ("%d", &n) ;
+    } while (n==1) ;
+}
+void display()
+{
+    temp=head;
+    while(temp->next !=0)
+    {
+        printf("%d\n",temp->data) ;
+        temp=temp->next;
+    }
+    printf("%d", temp->data) ;
+}
+void del_end()
+{
+temp=tail;
+tail->prev->next=0;
+tail=temp->prev;
+temp->prev=0;
+}
+void del_pos() 
+{
+int pos, i;
+temp=head;
+printf("Enter the position:") ;
+scanf("%d", &pos) ;
+for(i=0;i<pos-1;i++) 
+{
+temp=temp->next;
+}
+temp->next->prev=0;
+temp->next=temp->next->next;
+temp->next->prev->next=0;
+temp->next->prev=temp;
+}
+void main()
+{
+    create() ;
+    display () ;
+    printf("\n") ;
+    del_end() ;
+    display () ;
+    printf("\n") ;
+    del_pos() ;
+    display () ;
+    
+}
+    
