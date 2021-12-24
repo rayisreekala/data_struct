@@ -1,0 +1,178 @@
+#include<stdio.h>
+struct node {
+    int data;
+    struct node *next;
+}*newnode,*temp, *temp1, *pn, *currentnode;
+struct node* head=0;
+struct node*tail=0;
+void create()
+{
+    int value,count=0,n;
+    do {
+        newnode=(struct node*)malloc(sizeof(struct node) );
+        printf("enter a value:") ;
+        scanf("%d", &value) ;
+        newnode->data=value;
+        newnode->next=0;
+        if(head==0)
+        {
+            head=newnode;
+            tail=newnode;
+        }
+        else
+        {
+            tail->next=newnode;
+            tail=newnode;
+        }
+        printf("enter 1 to continue and 0 to exit:") ;
+        scanf("%d", &n) ;
+    } while(n==1) ;
+}
+void display()
+{
+    int count;
+    temp=head;
+    while(temp !=0)
+    {
+        printf("%d\n",temp->data) ;
+        temp=temp->next;
+    }
+}
+void ins_beg()
+{
+
+    int value, count;
+    temp=head;
+    newnode=(struct node*)malloc(sizeof(struct node) );
+    count++;
+    printf("enter a value to insert at begining :") ;
+    scanf("%d", &value) ;
+    newnode->data=value;
+    newnode->next=temp;
+    head=newnode;
+}
+void ins_end()
+{
+    int value, count;
+    temp=tail;
+    newnode=(struct node*)malloc(sizeof(struct node) );
+    printf("enter a to insert at  end value:") ;
+    scanf("%d", &value) ;
+    newnode->data=value;
+    newnode->next=0;
+    temp->next=newnode;
+    tail=newnode;
+}
+void ins_pos()
+{
+    int value,pos;
+    int i, count;
+    temp=head;
+    newnode=(struct node*)malloc(sizeof(struct node) );
+    printf("enter the position :") ;
+    scanf("%d", &pos) ;
+    printf("enter a value:") ;
+    scanf("%d", &value) ;
+    newnode->data=value;
+    newnode->next=0;
+    for(i=0; i<pos-1; i++)
+    {
+        temp=temp->next;
+    }
+    newnode->next=temp->next;
+    temp->next=newnode;
+}
+void del_beg()
+{
+    temp=head;
+    head=temp->next;
+    temp->next=0;
+}
+void del_end()
+{
+    temp=head;
+    while(temp->next!=tail)
+    {
+        temp=temp->next;
+    }
+    temp->next=0;
+    tail=temp;
+}
+void del_pos()
+{
+    int pos,i;
+    temp=head;
+    printf("enter the position:") ;
+    scanf("%d", &pos) ;
+    for(i=0; i<pos-1; i++)
+    {   temp=temp->next;
+    }
+    temp1=temp->next->next;
+    temp->next=temp1;
+    tail=temp1;
+}
+void reverse()
+{
+    temp1=head;
+    pn=0;
+    temp=newnode=head;
+    while(newnode !=0)
+    {
+        newnode=newnode->next;
+        temp->next=pn;
+        pn=temp;
+        temp=newnode;
+    }
+    head=pn;
+}
+void main()
+{
+    int n;
+    printf("Enter your choice\n") ;
+    printf("2.To display elements\n3.To insert at begining\n4.To insert at the end\n5.To insert at the position\n6.To delete at the begining\n7.To delete at the end\n8.To delete at position\n9.To reverse the data\n");
+    scanf("%d", &n) ;
+    switch(n)
+    {
+    case 2:
+        create() ;
+        display() ;
+        break;
+    case 3:
+        creat() ;
+        ins_beg() ;
+        display() ;
+        break;
+    case 4:
+        create();
+        ins_end() ;
+        display() ;
+        break;
+    case 5:
+        create();
+        ins_pos() ;
+        display() ;
+        break;
+    case 6:
+        create();
+        del_beg() ;
+        display() ;
+        break;
+    case 7:
+        create();
+        del_end() ;
+        display() ;
+        break;
+    case 8:
+        create();
+        del_pos() ;
+        display() ;
+        break;
+    case 9:
+        create();
+        reverse() ;
+        display() ;
+        break;
+    default:
+        printf("Out of range(2-9) ");
+    }
+}
