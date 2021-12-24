@@ -1,0 +1,39 @@
+#include<stdio.h>
+void main()
+{
+    int i, a[100], k,ele, j, low, mid, high, t, n;
+    printf("enter no. of elements:");
+    scanf("%d", &n);
+    printf("enter elements");
+    for(i=0; i<n; i++)
+        scanf("%d", &a[i]);
+    printf("enter element:");
+    scanf("%d", &ele); 
+    high=n-1;
+    low=0;
+    mid=(low+high) /2;
+   
+        while(low<=high)
+        {
+            if(ele == a[mid])
+            {
+               printf("it's found") ;
+               break;
+            }
+            else if(ele<a[mid])
+            {
+                high=mid-1;
+            }
+            else
+            {
+               low=mid+1;
+            }
+             mid=(low+high) /2;
+        }
+   
+        if(low>high)
+        printf("mis-matched") ;
+   
+   
+}
+
