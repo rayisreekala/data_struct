@@ -1,0 +1,31 @@
+#include<stdio.h>
+void main()
+{
+    int i, a[100], k, j, gap, t, n;
+    printf("enter no. of elements:");
+    scanf("%d", &n);
+    printf("enter elements");
+    for(i=0;i<n;i++)
+    scanf("%d", &a[i]);
+    for(gap=n/2;gap>0;gap=gap-1)
+    {
+        k=gap;j=0;
+        while(k<n)
+        {
+            if(a[gap+j]<a[k-gap])
+            {
+                t=a[gap+j];
+                a[gap+j]=a[k-gap];
+                a[k-gap]=t;
+            }
+            k++;
+            j++;
+        }
+    }
+    printf("after sorting\n");
+    for(i=0;i<n;i++)
+    {
+        printf("%d\t",a[i]);
+    }
+}
+
