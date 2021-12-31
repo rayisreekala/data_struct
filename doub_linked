@@ -41,38 +41,125 @@ void display()
     }
     printf("%d", temp->data) ;
 }
+void ins_beg()
+{
+    int value;
+    temp=head;
+    printf("enter the value:") ;
+    scanf("%d", &value) ;
+    newnode=(struct node*)malloc(sizeof (struct node)) ;
+    newnode->data=value;
+    newnode->prev=0;
+    newnode->next=head;
+    head=newnode;
+}
+void ins_end()
+{
+    int value;
+    temp=tail;
+    printf("enter the value:") ;
+    scanf("%d", &value) ;
+    newnode=(struct node*)malloc(sizeof (struct node)) ;
+    newnode->data=value;
+    newnode->prev=tail;
+    tail->next=newnode;
+    newnode->next=0;
+    tail=newnode;
+}
+void ins_pos() 
+{int pos, i,value;
+    temp=head;
+    printf("Enter the position:") ;
+    scanf("%d", &pos) ;
+    printf("enter the value:") ;
+    scanf("%d", &value) ;
+    newnode=(struct node*)malloc(sizeof (struct node)) ;
+    newnode->data=value;
+    for(i=0; i<pos-1; i++)
+    {
+        temp=temp->next;
+    }
+    temp->next->prev=newnode;
+    newnode->prev=temp;
+    newnode->next=temp->next;
+    temp->next=newnode;
+    }
+
 void del_end()
 {
-temp=tail;
-tail->prev->next=0;
-tail=temp->prev;
-temp->prev=0;
+    temp=tail;
+    tail->prev->next=0;
+    tail=temp->prev;
+    temp->prev=0;
 }
-void del_pos() 
+void del_pos()
 {
-int pos, i;
-temp=head;
-printf("Enter the position:") ;
-scanf("%d", &pos) ;
-for(i=0;i<pos-1;i++) 
-{
-temp=temp->next;
+    int pos, i;
+    temp=head;
+    printf("Enter the position:") ;
+    scanf("%d", &pos) ;
+    for(i=0; i<pos-1; i++)
+    {
+        temp=temp->next;
+    }
+    temp->next->prev=0;
+    temp->next=temp->next->next;
+    temp->next->prev->next=0;
+    temp->next->prev=temp;
 }
-temp->next->prev=0;
-temp->next=temp->next->next;
-temp->next->prev->next=0;
-temp->next->prev=temp;
+void del_beg()
+{
+    head->prev=0;
+    head=head->next;
+    head->prev=0;
 }
 void main()
 {
     create() ;
-    display () ;
-    printf("\n") ;
-    del_end() ;
-    display () ;
-    printf("\n") ;
-    del_pos() ;
-    display () ;
-    
+    int n;
+    printf("Enter your choice\n") ;
+    printf("2.To display elements\n3.To insert at begining\n4.To insert at the end\n5.To insert at the position\n6.To delete at the begining\n7.To delete at the end\n8.To delete at position\n9.To reverse the data\n");
+    scanf("%d", &n) ;
+    switch(n)
+    {
+    case 2:
+        display() ;
+        break;
+    case 3:
+        ins_beg() ;
+        display() ;
+        break;
+    case 4:
+        
+        ins_end() ;
+        display() ;
+        break;
+    case 5:
+        ins_pos() ;
+        display() ;
+        break;
+    case 6:
+
+        del_beg() ;
+        display() ;
+        break;
+    case 7:
+        del_end() ;
+        display() ;
+        break;
+    case 8:
+
+        del_pos() ;
+        display() ;
+        break;
+    case 9:
+
+        //reverse() ;
+        //   display() ;
+        break;
+    default:
+        printf("Out of range(2-9") ;
+
+    }
 }
     
