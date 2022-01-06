@@ -113,9 +113,21 @@ void del_beg()
     head=head->next;
     head->prev=0;
 }
+int count() 
+{
+count=0;
+temp=head;
+while(temp !=0) 
+{
+count++;
+temp=temp->next;
+}
+return count;
+}
 void main()
 {
     create() ;
+count() ;
     int n;
     printf("Enter your choice\n") ;
     printf("2.To display elements\n3.To insert at begining\n4.To insert at the end\n5.To insert at the position\n6.To delete at the begining\n7.To delete at the end\n8.To delete at position\n9.To reverse the data\n");
