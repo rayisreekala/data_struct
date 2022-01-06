@@ -7,7 +7,7 @@ struct node* head=0;
 struct node*tail=0;
 void create()
 {
-    int value,count=0,n;
+    int value,n;
     do {
         newnode=(struct node*)malloc(sizeof(struct node) );
         printf("enter a value:") ;
