@@ -1,0 +1,98 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define n 10
+struct node
+{   int data;
+    struct node* next;
+}*newnode, *c, *a[n]= {0};
+void create()
+{
+    int v,i, k;
+    do {
+        printf("enter the value:") ;
+        scanf("%d", &v) ;
+        newnode=(struct node*)malloc(sizeof(struct node)) ;
+        i=v%n;
+        newnode->data=v;
+        newnode->next=0;
+        if(a[i]==0)
+            a[i]=newnode;
+        else
+        {
+            c=a[i];
+            while(c->next!=0)
+            {
+                c=c->next;
+            }
+            c->next=newnode;
+        }
+
+        printf("enter 1 to continue 0 to exit:") ;
+        scanf ("%d", &k) ;
+    } while(k==1) ;
+}
+void display()
+{
+    int i;
+    for(i=0; i<n; i++)
+    {
+        if(a[i] !=0)
+        {
+            printf("\n hash enter at%d\n ", i) ;
+            c=a[i];
+            while(c !=0)
+            {
+                printf("%d", c->data) ;
+                c=c->next;
+            }
+        }
+        else
+            printf("\n no hash at%d\n",i) ;
+    }
+}
+void search()
+{
+    int e, i;
+    printf (" enter the element:") ;
+    scanf("%d", &e) ;
+    for(i=0; i<n; i++)
+    {
+        c=a[i];
+        while(c !=0)
+        {
+            if(e==c->data) {
+                printf(" it's found at%d", i) ;
+                break;
+            }
+            else
+                c=c->next;
+        }
+    }
+}
+
+
+void delete ()
+{   int pos,i=0;
+    printf("enter the position :") ;
+    scanf("%d", &pos) ;
+    for(i=0; i<n; i++)
+    {
+        c=a[i];
+        while(i<pos-1)
+        {
+            c=c->next;
+            i++;
+        }
+        c->next=c->next->next;
+    }
+}
+
+void main()
+{
+    create() ;
+    display() ;
+    search() ;
+    /*delete() ;
+    display() ;*/
+}
+
