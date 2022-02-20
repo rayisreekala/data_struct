@@ -1,0 +1,70 @@
+#include<stdio.h>
+struct node {
+    int data;
+    struct node* next;
+}*newnode, *top,*temp, *head=0, *tail=0;
+void push()
+{
+    int item;
+    printf("Enter the item:") ;
+    scanf ("%d", &item) ;
+    newnode=(struct node*)malloc(sizeof(struct node)) ;
+    newnode->data=item;
+    newnode->next=0;
+    if(head==0)
+    {
+        head=newnode;
+        tail=newnode;
+    }
+    else
+    {
+        tail->next=newnode;
+        tail=newnode;
+        top=newnode;
+    }
+}
+void pop()
+{
+    temp=head;
+    while(temp->next  !=top)
+    {
+        temp=temp->next;
+    }
+    printf("The poped element is:%d\n", top->data) ;
+    temp->next=0;
+    tail=temp;
+    top=temp;
+}
+void display ()
+{
+    temp=head;
+    printf("The elements in the stack are:") ;
+    while(temp  !=0)
+    {
+        printf("%d\n", temp->data) ;
+        temp=temp->next;
+    }
+}
+void main()
+{
+    int c, i;
+    while(i!=0)
+    {
+        printf("enter choice 1.push\n 2.pop\n");
+        scanf("%d", &c) ;
+        switch(c)
+        {
+        case 1:
+            push() ;
+            break;
+        case 2:
+            pop() ;
+            break;
+        }
+        printf ("enter 1 to continue 0 to exit") ;
+        scanf("%d", &i);
+    }
+    display() ;
+}
+
+
