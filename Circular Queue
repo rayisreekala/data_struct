@@ -1,0 +1,75 @@
+#include<stdio.h>
+#define n 5
+int a[n], rear=0;
+front=0, count=0;
+void enqueue()
+{
+    if(count >=n)
+        printf("Queue is full!...\n ") ;
+    else
+    {
+        int item;
+        printf(" Enter the element:") ;
+        scanf("%d", &item) ;
+        a[rear]=item;
+        rear=(rear+1)%n;
+        count++;
+    }
+}
+void dequeue()
+{
+    if(count <=0)
+        printf("Queue is empty\n") ;
+    else
+    {
+        printf("The dequeued element is :%d\n", a[front]) ;
+        front=(front+1)%n;
+        count--;
+    }
+}
+void display ()
+{
+    int i;
+    printf("The elements in the queue are ") ;
+    if(count==n )
+    {
+        for(i=0; i<n; i++)
+            printf("%d\n", a[i]) ;
+    }
+    else if(rear > front)
+    {
+        for(i=front; i<rear; i++)
+            printf("%d\n", a[i]) ;
+    }
+    else if(count!=n && rear<front)
+    {
+        for(i=0; i<rear; i++)
+            printf("%d\n",a[i]) ;
+        for(i=front; i<n; i++)
+            printf("%d\n", a[i]) ;
+    }
+}
+void main()
+{
+    int c, i;
+    while(i !=0)
+    {
+        printf(" Enter ur choice 1.enqueue\n 2.dequeue\n") ;
+        scanf("%d", &c) ;
+        switch (c)
+        {
+        case 1:
+            enqueue() ;
+            break;
+        case 2:
+            dequeue() ;
+            break;
+        }
+        printf ("enter 1 to continue 0 to exit") ;
+        scanf("%d", &i);
+    }
+    display () ;
+}
+
+
+
