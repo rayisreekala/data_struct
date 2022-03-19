@@ -1,0 +1,71 @@
+#include<stdio.h>
+struct node
+{
+    int data;
+    struct node* next;
+}*newnode, *head=0, *top=0,*temp;
+void push()
+{
+    int ele;
+    printf("enter the element:") ;
+    scanf("%d", &ele) ;
+    newnode=(struct node*) malloc(sizeof(struct node)) ;
+    newnode->data=ele;
+    newnode->next=0;
+    if(head==0)
+    {
+        head=newnode;
+        top=newnode;
+    }
+    else
+    {
+        top->next=newnode;
+        top=newnode;
+    }
+}
+void pop()
+{
+    temp=head;
+    if(head==0&&top==0)
+        printf("stack is empty...\n") ;
+    else
+    {
+        while(temp->next  !=top)
+            temp=temp->next;
+        printf("The dequeued element is %d\n", temp->next->data) ;
+        temp->next=0;
+        top=temp;
+    }
+}
+void display ()
+{
+    temp=head;
+    while (temp->next  !=0)
+    {
+        printf("%d\n",temp->data) ;
+        temp=temp->next;
+    }
+    printf("%d", temp->data) ;
+}
+void main()
+{
+    int i,c;
+    do
+    {
+        printf("enter ur choice :\n") ;
+        printf ("1.push\n2.pop\n") ;
+        scanf ("%d", &c) ;
+        switch(c)
+        {
+        case 1:
+            push() ;
+            break;
+        case 2:
+            pop() ;
+            break;
+        }
+        printf("enter 1 to continue") ;
+        scanf ("%d", &i);
+    } while (i==1) ;
+    display () ;
+}
