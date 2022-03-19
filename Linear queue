@@ -1,0 +1,57 @@
+#include<stdio.h>
+#define n 10
+int q[n], f=0, r=0;
+void enqueue()
+{
+int ele;
+    if(f==0 && r==n-1)
+        printf("Queueu is full!... ") ;
+    else
+    {
+        
+        printf(" enter the element:") ;
+        scanf("%d", &ele) ;
+        q[r]=ele;
+        r++;
+    }
+}
+void dequeue()
+{
+    if(f==r)
+        printf("queu is empty") ;
+    else
+    {
+        printf("The dequeud element is  %d", q[f]) ;
+        f++;
+    }
+}
+void display ()
+{
+    int i;
+    for(i=f;i<r;i++)
+    {
+        printf("%d\n", q[i]) ;
+    }
+}
+void main()
+{
+    int i,c;
+    do
+    {
+        printf("enter ur choice \n") ;
+        printf("1.enqueue() \n2.dequeue\n") ;
+        scanf ("%d", &c) ;
+        switch(c) 
+        {
+        case 1:
+            enqueue() ;
+            break;
+        case 2:
+            dequeue() ;
+            break;
+        }
+        printf ("enter 1 to continue") ;
+        scanf("%d", &i);
+    } while(i==1) ;
+    display () ;
+}
