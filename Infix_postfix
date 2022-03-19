@@ -1,0 +1,114 @@
+#include<stdio.h>
+#include<string.h>
+#define n 10
+int top=-1;
+char a[n];
+char push(char item)
+{
+    if(top>=n)
+        printf("Stack overflow") ;
+    else
+    {
+    top++;
+    
+        a[top]=item;
+        
+        
+        
+        
+    }
+}
+char pop()
+{
+    char k;
+    if(top<0)
+    {
+        printf("Stack underflow") ;
+       
+           }
+    else
+    {
+    k=a[top];
+    top--;
+        return k;
+    }
+    
+}
+int priority (char item)
+{
+    if(item=='^' || item=='%')
+        return 3;
+    else if(item=='*' || item=='/')
+        return 2;
+    else if(item=='+' || item=='-')
+        return 1;
+    else
+        return 0;
+}
+int precedence (char sym)
+{
+    if(sym=='^' || sym=='%' || sym=='*'|| sym=='/'|| sym=='+' ||sym=='-')
+        return 1;
+    else
+        return 0;
+}
+void infix_postfix(char infix[], char postfix[])
+{
+    char item;
+    int i=0, j=0;
+    char x;
+    item=infix[i];
+    push('(') ;
+    strcat(infix,")") ;
+    while(item  !='\0')
+    {
+        if(item=='(')
+            push(item) ;
+        else if(isalpha(item) || isdigit(item))
+        {
+            postfix[j]=item;
+            j++;
+        }
+        else if(precedence(item) ==1)
+        {
+            x=pop() ;
+            while(precedence (x) ==1 && priority (x) >=priority(item))
+            {
+                postfix[j]=x;
+                j++;
+                x=pop() ;
+
+            }
+            push(x) ;
+            push(item) ;
+        }
+        else if(item==')')
+        {
+            x=pop() ;
+            while(x !='(')
+            {
+                postfix[j]=x;
+                j++;
+                x=pop() ;
+            }
+        }
+        else
+           break;
+
+        i++;
+        item=infix[i];
+    }
+    postfix='\0';
+}
+void main()
+{
+    char infix[n], postfix[n];
+    printf("enter the infix expression ") ;
+    scanf("%s", infix) ;
+    printf("infix expression is:\n") ;
+    puts(infix) ;
+    infix_postfix(infix, postfix) ;
+    printf("postfix expression is:\n") ;
+    puts(postfix) ;
+}
+
